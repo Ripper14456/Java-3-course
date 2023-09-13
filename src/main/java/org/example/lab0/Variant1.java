@@ -1,6 +1,6 @@
-package org.example;
+package org.example.lab0;
 
-public class Lab1 {
+public class Variant1 {
     public int inMeter(int l) {
         return l / 100;
     }

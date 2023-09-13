@@ -1,4 +1,6 @@
-import org.example.Lab1;
+package lab0;
+
+import org.example.lab0.Variant1;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,12 +11,12 @@ import java.io.PrintStream;
 import static org.testng.Assert.assertEquals;
 
 
-public class Lab1Test {
+public class Variant1Test {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Test(dataProvider = "meterData")
     public void meterTest(int L, int expected) {
-        int actual = new Lab1().inMeter(L);
+        int actual = new Variant1().inMeter(L);
         assertEquals(actual, expected);
     }
 
@@ -31,7 +33,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "positiveNumberData")
     public void testIsPositiveNumber(int n, boolean expected) {
-        boolean actual = new Lab1().isPositiveNumber(n);
+        boolean actual = new Variant1().isPositiveNumber(n);
         assertEquals(actual, expected);
     }
 
@@ -48,7 +50,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "modifyNumberData")
     public void testModifyNumber(int input, int expected) {
-        int actual = new Lab1().modifyNumber(input);
+        int actual = new Variant1().modifyNumber(input);
         assertEquals(actual, expected);
     }
 
@@ -65,7 +67,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "dayOfWeekData")
     public void testGetDayOfWeek(int day, String expected) {
-        String actual = new Lab1().getDayOfWeek(day);
+        String actual = new Variant1().getDayOfWeek(day);
         assertEquals(actual, expected);
     }
 
@@ -92,7 +94,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "numberData")
     public void testPrintNumberNTimes(int K, int N, String expectedOutput) {
-        new Lab1().printNumberNTimes(K, N);
+        new Variant1().printNumberNTimes(K, N);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -108,7 +110,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "remainingLengthData")
     public void testFindRemainingLength(int A, int B, int expected) {
-        int actual = new Lab1().findRemainingLength(A, B);
+        int actual = new Variant1().findRemainingLength(A, B);
         assertEquals(actual, expected);
     }
 
@@ -127,7 +129,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "oddNumbersData")
     public void testGenerateOddNumbers(int N, int[] expected) {
-        int[] actual = new Lab1().generateOddNumbers(N);
+        int[] actual = new Variant1().generateOddNumbers(N);
         assertEquals(actual, expected);
     }
 
@@ -143,7 +145,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "matrixData")
     public void testCreateMatrix(int M, int N, int[][] expectedMatrix) {
-        int[][] actualMatrix = new Lab1().createMatrix(M, N);
+        int[][] actualMatrix = new Variant1().createMatrix(M, N);
 
         assertEquals(expectedMatrix.length, actualMatrix.length);
         for (int i = 0; i < expectedMatrix.length; i++) {
@@ -168,7 +170,7 @@ public class Lab1Test {
 
     @Test(dataProvider = "minMaxData")
     public void testFindMinMax(int[] n, int[] expected) {
-        int[] actual = new Lab1().findMinMax(n);
+        int[] actual = new Variant1().findMinMax(n);
         assertEquals(actual, expected);
     }
 
