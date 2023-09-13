@@ -23,8 +23,8 @@ public class Lab2Test {
     public Object[][] serializeToJSONTest() {
         List<Person> list = Arrays.asList
                 (
-                        new Person("Serg", "Mazurok", 19, new Residence("Ukraine", "Chernivtsi", "Golovna 165")),
-                        new Person("Bogdan", "Mazurok", 16, new Residence("Ukraine", "Kyiv", "Pushkina 123"))
+                        new Person("Oleh", "Alekseienko", 19, new Residence("Ukraine", "Chernivtsi", "Shevchenko 15")),
+                        new Person("Vika", "Alekseienko", 16, new Residence("Ukraine", "Kyiv", "Pushkina 123"))
                 );
         return new Object[][]
                 {
