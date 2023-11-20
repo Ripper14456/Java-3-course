@@ -1,2 +1,2 @@
-19,Serg,"Golovna 165",Chernivtsi,Ukraine,Mazurok
-16,Bogdan,"Pushkina 123",Kyiv,Ukraine,Mazurok
+19,Oleh,"Shevchenko 15",Chernivtsi,Ukraine,Alekseienko
+16,Vika,"Pushkina 123",Kyiv,Ukraine,Alekseienko
