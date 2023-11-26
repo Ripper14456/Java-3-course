@@ -1,6 +1,11 @@
 package org.example.lab2.entities;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 public class Residence {
     public String country;
@@ -11,6 +16,11 @@ public class Residence {
         this.country = country;
         this.city = city;
         this.address = address;
+    }
+    public Residence(Residence.ResidenceBuilder rb) {
+        this.country = rb.country;
+        this.city = rb.city;
+        this.address = rb.address;
     }
 
     public Residence(){}
@@ -59,5 +69,37 @@ public class Residence {
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    public static class ResidenceBuilder
+    {
+        public String country;
+        public String city;
+        public String address;
+
+        public Residence.ResidenceBuilder setCountry(String country) {
+            this.country = country;
+            return this;
+        }
+        public Residence.ResidenceBuilder setCity(String city) {
+            this.city = city;
+            return this;
+        }
+        public Residence.ResidenceBuilder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Residence build() {
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<Residence.ResidenceBuilder>> constraintViolations = validator.validate(this);
+            StringBuilder exceptions = new StringBuilder("\n");
+            for(ConstraintViolation constraintViolation : constraintViolations) {
+                String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
+            }
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+            return new Residence(this);
+        }
     }
 }

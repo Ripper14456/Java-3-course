@@ -1,8 +1,10 @@
-package org.example.lab3;
+package org.example.lab4;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,13 +18,15 @@ public class Residence {
         this.city = city;
         this.address = address;
     }
+
     public Residence(Residence.ResidenceBuilder rb) {
         this.country = rb.country;
         this.city = rb.city;
         this.address = rb.address;
     }
 
-    public Residence(){}
+    public Residence() {
+    }
 
     public String getCountry() {
         return country;
@@ -70,20 +74,24 @@ public class Residence {
                 '}';
     }
 
-    public static class ResidenceBuilder
-    {
+    public static class ResidenceBuilder {
+        @NotEmpty
         public String country;
+        @NotEmpty
         public String city;
+        @NotEmpty
         public String address;
 
         public Residence.ResidenceBuilder setCountry(String country) {
             this.country = country;
             return this;
         }
+
         public Residence.ResidenceBuilder setCity(String city) {
             this.city = city;
             return this;
         }
+
         public Residence.ResidenceBuilder setAddress(String address) {
             this.address = address;
             return this;
@@ -93,13 +101,12 @@ public class Residence {
             Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
             Set<ConstraintViolation<Residence.ResidenceBuilder>> constraintViolations = validator.validate(this);
             StringBuilder exceptions = new StringBuilder("\n");
-            for(ConstraintViolation constraintViolation : constraintViolations) {
+            for (ConstraintViolation constraintViolation : constraintViolations) {
                 String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
                 exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
             }
-            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+            if (constraintViolations.size() > 0) throw new IllegalArgumentException(String.valueOf(exceptions));
             return new Residence(this);
         }
     }
-
 }

@@ -3,10 +3,10 @@ package org.example.lab3;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PersonService {
+public class PersonServiceWithStream implements PersonServiceInterface {
     public List<Person> myList;
 
-    public PersonService(List<Person> myList) {
+    public PersonServiceWithStream(List<Person> myList) {
         this.myList = myList;
     }
 

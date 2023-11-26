@@ -7,6 +7,7 @@ import org.example.lab2.entities.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class Lab2Test {
     public Object[][] serializeToJSONTest() {
         List<Person> list = Arrays.asList
                 (
-                        new Person("Oleh", "Alekseienko", 19, new Residence("Ukraine", "Chernivtsi", "Shevchenko 15")),
-                        new Person("Vika", "Alekseienko", 16, new Residence("Ukraine", "Kyiv", "Pushkina 123"))
+                        new Person("Oleh", "Alekseienko", LocalDate.of(2004,9,5), new Residence("Ukraine", "Chernivtsi", "Shevchenko 15")),
+                        new Person("Vika", "Alekseienko", LocalDate.of(2003,11,23), new Residence("Ukraine", "Kyiv", "Pushkina 123"))
                 );
         return new Object[][]
                 {

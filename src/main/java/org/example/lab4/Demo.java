@@ -1,30 +1,29 @@
 package org.example.lab4;
 
-import org.example.lab4.components.*;
-import org.example.lab4.devices.*;
+import java.time.LocalDate;
 
 public class Demo {
     public static void main(String[] args) {
-        PC.PCBuilder pcBuilder = new PC.PCBuilder();
-        pcBuilder.setKeyboard("Razer BlackWidow Chroma V2");
-        pcBuilder.setMouse("Logitech G PRO Wireless");
-        pcBuilder.setCpu(new CPU("Ryzen 5 3600", 1, 4.2));
-        pcBuilder.setGpu(new GPU("MSI 1060",8000,256,2));
-        pcBuilder.setRam(new RAM("Hyperx",16,2400));
-        pcBuilder.setMemoryType(MemoryType.DDR4);
-        pcBuilder.setHardDrive(new HardDrive("Kingston",2.5,5000,5000));
+        Person.PersonBuilder obj1 = new Person.PersonBuilder();
+        Person.PersonBuilder obj2 = new Person.PersonBuilder();
+        Residence.ResidenceBuilder obj3 = new Residence.ResidenceBuilder();
 
-        Device pc = pcBuilder.build();
-        System.out.println(pc.toString());
+        obj3.setCountry("Ukraine");
+        obj3.setCity("Kyiv");
+        obj3.setAddress("Golovna 167");
 
-        PlayStation.PSBuilder playStation5 = new PlayStation.PSBuilder();
-        playStation5.setType(PlayStation.PlayStationType.PS5);
-        playStation5.setCpu(new CPU("AMD Ryzen Zen 2",8,3.5));
-        playStation5.setGpu(new GPU("AMD Radeon RDNA 2", 18000,256,3));
-        playStation5.setRam(new RAM("",16,3666));
-        playStation5.setMemoryType(MemoryType.DDR6);
-        playStation5.setHardDrive(new HardDrive("Kingston",3.5,5000,5000));
-        Device ps5 = playStation5.build();
-        System.out.printf(ps5.toString());
+        obj1.setFirstName("Oleg");
+        obj1.setSecondName("Demon");
+        obj1.setDateOfBirth(LocalDate.of(2004,9,5));
+        obj1.setResidence(obj3.build());
+
+        obj2.setFirstName("Serge");
+        obj2.setSecondName("Mazurka");
+        obj2.setDateOfBirth(LocalDate.of(2003,2,23));
+        obj2.setResidence(new Residence("Ukraine","Chernivtsi","Synogoge 322"));//null test
+
+        System.out.println(obj1.build());
+        System.out.println(obj2.build());
+        System.out.println(obj3.build());
     }
 }

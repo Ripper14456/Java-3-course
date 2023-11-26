@@ -1,14 +1,17 @@
-package org.example.lab3;
+package org.example.lab4;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Set;
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person> {
     private String firstName;
     private String secondName;
     private LocalDate dateOfBirth;
@@ -20,7 +23,8 @@ public class Person implements Comparable<Person>{
         this.dateOfBirth = dateOfBirth;
         this.residence = residence;
     }
-    public Person(PersonBuilder pb) {
+
+    public Person(Person.PersonBuilder pb) {
         this.firstName = pb.firstName;
         this.secondName = pb.secondName;
         this.dateOfBirth = pb.dateOfBirth;
@@ -46,6 +50,7 @@ public class Person implements Comparable<Person>{
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
+
     public int getDaysFromBirth() {
         return (int) ChronoUnit.DAYS.between(this.dateOfBirth, LocalDate.now());
     }
@@ -94,25 +99,33 @@ public class Person implements Comparable<Person>{
         return (int) ChronoUnit.DAYS.between(this.dateOfBirth, obj.dateOfBirth);
     }
 
-    public static class PersonBuilder
-    {
+    public static class PersonBuilder {
+        @NotEmpty
         public String firstName;
+        @NotEmpty
         public String secondName;
+        @Past
+        @NotNull
         public LocalDate dateOfBirth;
+
+        @NotNull
         public Residence residence;
 
         public Person.PersonBuilder setFirstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
+
         public Person.PersonBuilder setSecondName(String secondName) {
             this.secondName = secondName;
             return this;
         }
+
         public Person.PersonBuilder setDateOfBirth(LocalDate dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }
+
         public Person.PersonBuilder setResidence(Residence residence) {
             this.residence = residence;
             return this;
@@ -122,11 +135,11 @@ public class Person implements Comparable<Person>{
             Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
             Set<ConstraintViolation<Person.PersonBuilder>> constraintViolations = validator.validate(this);
             StringBuilder exceptions = new StringBuilder("\n");
-            for(ConstraintViolation constraintViolation : constraintViolations) {
+            for (ConstraintViolation constraintViolation : constraintViolations) {
                 String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
                 exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
             }
-            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+            if (constraintViolations.size() > 0) throw new IllegalArgumentException(String.valueOf(exceptions));
             return new Person(this);
         }
     }
