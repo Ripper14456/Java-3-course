@@ -1,50 +1,49 @@
 package org.example.lab2.serialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.example.lab2.entities.Person;
-import java.time.LocalDate;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 public class SerializeToTxt implements Serialize<Person> {
-    @Override
-    public void writeToFile(List<Person> persons, String fileName) throws IOException {
-        CsvMapper mapper = new CsvMapper();
+
+    private final ObjectMapper mapper;
+
+    public SerializeToTxt() {
+        mapper = new ObjectMapper();
         mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
         mapper.registerModule(new JavaTimeModule());
 
         SimpleModule module = new SimpleModule();
         module.addSerializer(LocalDate.class, new ToStringSerializer());
+        module.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
         mapper.registerModule(module);
+    }
 
-        CsvSchema schema = mapper.schemaFor(Person.class);
-        ObjectWriter writer = mapper.writerFor(Person.class).with(schema);
-        writer.writeValues(new File(fileName)).writeAll(persons);
+    @Override
+    public void writeToFile(List<Person> persons, String fileName) throws IOException {
+        String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(persons);
+        List<String> lines = Arrays.asList(jsonString.split("\n"));
+
+        Files.write(Paths.get(fileName), lines);
     }
 
     @Override
     public List<Person> readFromFile(String fileName) throws IOException {
-        CsvMapper mapper = new CsvMapper();
-        mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
-        mapper.registerModule(new JavaTimeModule());
-
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
-        mapper.registerModule(module);
-
-        CsvSchema schema = mapper.schemaFor(Person.class);
-        MappingIterator<Person> iterator = mapper.readerFor(Person.class)
-                .with(schema)
-                .readValues(new File(fileName));
-        return iterator.readAll();
+        String content = new String(Files.readAllBytes(Paths.get(fileName)));
+        Person[] personsArray = mapper.readValue(content, Person[].class);
+        return Arrays.asList(personsArray);
     }
 }

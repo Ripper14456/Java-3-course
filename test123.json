@@ -1,1 +1,1 @@
-[{"firstName":"Oleh","secondName":"Alekseienko","age":19,"country":"Ukraine","city":"Chernivtsi","address":"Shevchenko 15"},{"firstName":"Vika","secondName":"Alekseienko","age":16,"country":"Ukraine","city":"Kyiv","address":"Pushkina 123"}]
+[{"firstName":"Oleh","secondName":"Alekseienko","dateOfBirth":"2004-09-05","country":"Ukraine","city":"Chernivtsi","address":"Shevchenko 15"},{"firstName":"Vika","secondName":"Alekseienko","dateOfBirth":"2003-11-23","country":"Ukraine","city":"Kyiv","address":"Pushkina 123"}]

@@ -1,2 +1,15 @@
-19,Oleh,"Shevchenko 15",Chernivtsi,Ukraine,Alekseienko
-16,Vika,"Pushkina 123",Kyiv,Ukraine,Alekseienko
+[ {
+  "firstName" : "Oleh",
+  "secondName" : "Alekseienko",
+  "dateOfBirth" : "2004-09-05",
+  "country" : "Ukraine",
+  "city" : "Chernivtsi",
+  "address" : "Shevchenko 15"
+}, {
+  "firstName" : "Vika",
+  "secondName" : "Alekseienko",
+  "dateOfBirth" : "2003-11-23",
+  "country" : "Ukraine",
+  "city" : "Kyiv",
+  "address" : "Pushkina 123"
+} ]

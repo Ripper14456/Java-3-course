@@ -17,14 +17,14 @@ public class Person implements Comparable<Person> {
     private LocalDate dateOfBirth;
     private Residence residence;
 
-    public Person(String firstName, String secondName, LocalDate dateOfBirth, Residence residence) {
+    private Person(String firstName, String secondName, LocalDate dateOfBirth, Residence residence) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.dateOfBirth = dateOfBirth;
         this.residence = residence;
     }
 
-    public Person(Person.PersonBuilder pb) {
+    private Person(Person.PersonBuilder pb) {
         this.firstName = pb.firstName;
         this.secondName = pb.secondName;
         this.dateOfBirth = pb.dateOfBirth;
@@ -34,38 +34,19 @@ public class Person implements Comparable<Person> {
     public String getFirstName() {
         return firstName;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getSecondName() {
         return secondName;
     }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
-
     public int getDaysFromBirth() {
         return (int) ChronoUnit.DAYS.between(this.dateOfBirth, LocalDate.now());
     }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public Residence getResidence() {
         return residence;
     }
 
-    public void setResidence(Residence residence) {
-        this.residence = residence;
-    }
 
     @Override
     public boolean equals(Object o) {

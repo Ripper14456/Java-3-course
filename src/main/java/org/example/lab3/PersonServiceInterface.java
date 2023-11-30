@@ -3,11 +3,8 @@ package org.example.lab3;
 import java.util.List;
 
 public interface PersonServiceInterface {
-    List<Person> getMyList();
-    void setMyList(List<Person> myList);
-
-    @Override
-    String toString();
+    List<Person> getPersons();
+    void setPersons(List<Person> myList);
 
     List<Person> getPersonByFirstName(String firstName);
     List<Person> getPersonBySecondName(String secondName);

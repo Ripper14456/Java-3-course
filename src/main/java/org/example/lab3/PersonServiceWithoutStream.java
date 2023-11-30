@@ -10,19 +10,12 @@ public class PersonServiceWithoutStream implements PersonServiceInterface {
         this.myList = myList;
     }
 
-    public List<Person> getMyList() {
+    public List<Person> getPersons() {
         return myList;
     }
 
-    public void setMyList(List<Person> myList) {
+    public void setPersons(List<Person> myList) {
         this.myList = myList;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonServiceWithoutStream{" +
-                "myList=" + myList +
-                '}';
     }
 
     public List<Person> getPersonByFirstName(String firstName) {
